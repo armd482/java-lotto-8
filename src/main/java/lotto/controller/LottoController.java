@@ -6,6 +6,7 @@ import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.PurchasePrice;
 import lotto.service.LottoService;
+import lotto.util.InputLoop;
 import lotto.util.InputParser;
 import lotto.util.Validator;
 import lotto.view.InputView;
@@ -22,7 +23,7 @@ public class LottoController {
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
         Lotto winningLotto = getWinningLotto();
-        BonusNumber bonusNumber = getBonusNumber();
+        BonusNumber bonusNumber = getBonusNumber(winningLotto);
 
         lottoService.purchaseLotto(purchasePrice.getLottoAmount());
 
@@ -36,51 +37,37 @@ public class LottoController {
     }
 
     private PurchasePrice getPurchasePrice() {
-        while(true) {
-            try {
-                String purchasePriceInput = inputView.getPurchasePrice();
-                Validator.validateEmptyInput(purchasePriceInput);
+        return InputLoop.askUntilValid(() -> {
+            String purchasePriceInput = inputView.getPurchasePrice();
+            Validator.validateEmptyInput(purchasePriceInput);
 
-                int price = Integer.parseInt(purchasePriceInput);
-
-                return new PurchasePrice(price);
-            } catch(NumberFormatException e) {
-                System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+            int purchasePrice = Integer.parseInt(purchasePriceInput);
+            return new PurchasePrice(purchasePrice);
+        });
     }
 
     private Lotto getWinningLotto() {
-        while(true) {
-            try {
-                String winningLottoInput = inputView.getWinningNumber();
-                Validator.validateEmptyInput(winningLottoInput);
+        return InputLoop.askUntilValid(() -> {
+            String winningLottoInput = inputView.getWinningNumber();
+            Validator.validateEmptyInput(winningLottoInput);
 
-                List<Integer> winningNumbers = InputParser.parseWinningNumber(winningLottoInput);
-                return new Lotto(winningNumbers);
-            } catch(NumberFormatException e) {
-                System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+            List<Integer> winningNumbers = InputParser.parseWinningNumber(winningLottoInput);
+            return new Lotto(winningNumbers);
+        });
     }
 
-    private BonusNumber getBonusNumber() {
-        while(true) {
-            try {
-                String bonusNumberInput = inputView.getBonusNumber();
-                Validator.validateEmptyInput(bonusNumberInput);
+    private BonusNumber getBonusNumber(Lotto winningLotto) {
+        return InputLoop.askUntilValid(() -> {
+            String bonusNumberInput = inputView.getBonusNumber();
+            Validator.validateEmptyInput(bonusNumberInput);
 
-                int bonusNumber = Integer.parseInt(bonusNumberInput);
-                return new BonusNumber(bonusNumber);
-            } catch(NumberFormatException e) {
-                System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
-            }  catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            int bonusNumber = Integer.parseInt(bonusNumberInput);
+
+            if(winningLotto.isContain(bonusNumber)) {
+                throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE_ERROR.getMessage());
             }
-        }
+
+            return new BonusNumber(bonusNumber);
+        });
     }
 }

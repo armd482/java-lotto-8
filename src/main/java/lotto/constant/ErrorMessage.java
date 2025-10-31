@@ -10,6 +10,7 @@ public enum ErrorMessage {
     LOTTO_NUMBER_RANGE_ERROR("로또 번호는 1이상 45이하로 구성되어야 합니다"),
     LOTTO_NUMBER_DUPLICATE_ERROR("로또 번호는 중복되면 안됩니다."),
 
+    BONUS_NUMBER_DUPLICATE_ERROR("보너스 번호는 당첨 번호와 중복될 수 없습니다."),
     BONUS_NUMBER_NEGATIVE_ERROR("보너스 번호는 0보다 커야 합니다"),
     BONUS_NUMBER_RANGE_ERROR("보너스 번호는 1이상 45이하여야 합니다.");
 
