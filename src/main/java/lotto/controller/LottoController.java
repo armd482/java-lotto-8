@@ -5,21 +5,30 @@ import lotto.constant.ErrorMessage;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.PurchasePrice;
+import lotto.service.LottoService;
 import lotto.util.InputParser;
 import lotto.util.Validator;
 import lotto.view.InputView;
 
 public class LottoController {
     private final InputView inputView;
+    private final LottoService lottoService;
 
-    public LottoController(InputView inputView) {
+    public LottoController(InputView inputView, LottoService lottoService) {
         this.inputView = inputView;
+        this.lottoService =  lottoService;
     }
 
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
         Lotto winningLotto = getWinningLotto();
         BonusNumber bonusNumber = getBonusNumber();
+
+        lottoService.purchaseLotto(purchasePrice.getLottoAmount());
+
+        lottoService.getPurchasedLotto().forEach(lotto -> {
+            System.out.println(lotto.getNumbers());
+        });
 
         System.out.println(purchasePrice);
         System.out.println(winningLotto);

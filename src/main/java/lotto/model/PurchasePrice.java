@@ -15,4 +15,8 @@ public record PurchasePrice(int price) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_PRICE_UNIT_ERROR.getMessage());
         }
     }
+
+    public int getLottoAmount() {
+        return price / 1000;
+    }
 }
