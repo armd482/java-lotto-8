@@ -2,6 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.constant.ErrorMessage;
+import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.PurchasePrice;
 import lotto.util.InputParser;
@@ -18,9 +19,11 @@ public class LottoController {
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
         Lotto winningLotto = getWinningLotto();
+        BonusNumber bonusNumber = getBonusNumber();
 
         System.out.println(purchasePrice);
         System.out.println(winningLotto);
+        System.out.println(bonusNumber);
     }
 
     private PurchasePrice getPurchasePrice() {
@@ -51,6 +54,22 @@ public class LottoController {
             } catch(NumberFormatException e) {
                 System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
             } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private BonusNumber getBonusNumber() {
+        while(true) {
+            try {
+                String bonusNumberInput = inputView.getBonusNumber();
+                Validator.validateEmptyInput(bonusNumberInput);
+
+                int bonusNumber = Integer.parseInt(bonusNumberInput);
+                return new BonusNumber(bonusNumber);
+            } catch(NumberFormatException e) {
+                System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
+            }  catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }

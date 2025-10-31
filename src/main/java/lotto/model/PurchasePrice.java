@@ -3,9 +3,8 @@ package lotto.model;
 import lotto.constant.ErrorMessage;
 
 public record PurchasePrice(int price) {
-    public  PurchasePrice(int price) {
+    public PurchasePrice {
         validatePrice(price);
-        this.price = price;
     }
 
     private void validatePrice(int price) {
