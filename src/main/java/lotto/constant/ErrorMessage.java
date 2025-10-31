@@ -7,13 +7,14 @@ public enum ErrorMessage {
     PURCHASE_PRICE_UNIT_ERROR("금액은 1000원 단위여야 합니다.");
 
     private final String message;
+    public final String ERROR_PREFIX = "[ERROR] ";
 
     ErrorMessage(String message) {
         this.message = message;
     }
 
     public String getMessage() {
-        return message;
+        return ERROR_PREFIX + message;
     }
 
 }

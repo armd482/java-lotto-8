@@ -7,7 +7,6 @@ import lotto.view.InputView;
 
 public class LottoController {
     private final InputView inputView;
-    private final String ERROR_PRIFIX = "[ERROR] ";
 
     public LottoController(InputView inputView) {
         this.inputView = inputView;
@@ -28,9 +27,9 @@ public class LottoController {
 
                 return new PurchasePrice(price);
             } catch(NumberFormatException e) {
-                System.out.println(ERROR_PRIFIX + ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
+                System.out.println(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
             } catch (IllegalArgumentException e) {
-                System.out.println(ERROR_PRIFIX + e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
 
