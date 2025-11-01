@@ -14,7 +14,7 @@ public enum ErrorMessage {
     BONUS_NUMBER_RANGE_ERROR("보너스 번호는 1이상 45이하여야 합니다.");
 
     private final String message;
-    public final String ERROR_PREFIX = "[ERROR] ";
+    public static final String ERROR_PREFIX = "[ERROR] ";
 
     ErrorMessage(String message) {
         this.message = message;

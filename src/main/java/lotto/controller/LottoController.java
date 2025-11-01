@@ -7,6 +7,7 @@ import lotto.model.Lotto;
 import lotto.model.LottoRankResult;
 import lotto.model.PurchasePrice;
 import lotto.service.LottoService;
+import lotto.strategy.LottoGenerateStrategy;
 import lotto.util.InputLoop;
 import lotto.util.InputParser;
 import lotto.view.InputView;
@@ -16,16 +17,18 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
+    private final LottoGenerateStrategy lottoGenerateStrategy;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService,  LottoGenerateStrategy lottoGenerateStrategy) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoService =  lottoService;
+        this.lottoGenerateStrategy = lottoGenerateStrategy;
     }
 
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
-        List<Lotto> purchasedLotto = lottoService.purchaseLotto(purchasePrice.getLottoAmount());
+        List<Lotto> purchasedLotto = lottoService.purchaseLotto(purchasePrice.getLottoAmount(), lottoGenerateStrategy);
 
         outputView.printPurchasedLotto(purchasedLotto);
 

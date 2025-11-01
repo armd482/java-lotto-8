@@ -7,21 +7,19 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import lotto.constant.LottoRank;
-import lotto.constant.LottoRule;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
-import camp.nextstep.edu.missionutils.Randoms;
 import lotto.model.LottoRankResult;
 import lotto.model.PurchasePrice;
+import lotto.strategy.LottoGenerateStrategy;
 
 public class LottoService {
-    private final int PROFIT_RATE_SCALE = 1;
+    private static final int PROFIT_RATE_SCALE = 1;
 
-    public List<Lotto> purchaseLotto(int amount) {
+    public List<Lotto> purchaseLotto(int amount, LottoGenerateStrategy strategy) {
         List<Lotto> purchasedLotto = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            List<Integer> lottoNumber = Randoms.pickUniqueNumbersInRange(LottoRule.MIN_LOTTO_NUMBER, LottoRule.MAX_LOTTO_NUMBER, LottoRule.LOTTO_NUMBER_SIZE);
-            purchasedLotto.add(new Lotto(lottoNumber));
+            purchasedLotto.add(strategy.generateLotto());
         }
         return purchasedLotto;
     }
