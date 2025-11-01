@@ -1,5 +1,7 @@
 package lotto.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -9,8 +11,11 @@ import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.model.LottoRankResult;
+import lotto.model.PurchasePrice;
 
 public class LottoService {
+    private final int PROFIT_RATE_SCALE = 1;
+
     public List<Lotto> purchaseLotto(int amount) {
         List<Lotto> purchasedLotto = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
@@ -32,5 +37,23 @@ public class LottoService {
         });
 
         return new LottoRankResult(rankCounts);
+    }
+
+    public double calculateProfitRate(LottoRankResult rankResult, PurchasePrice purchasePrice) {
+        BigDecimal totalProfit = BigDecimal.valueOf(calculateTotalProfit(rankResult));
+        BigDecimal cost = BigDecimal.valueOf(purchasePrice.price());
+
+        BigDecimal profitRate =  totalProfit
+                .divide(cost, PROFIT_RATE_SCALE + 3, RoundingMode.DOWN)
+                .multiply(BigDecimal.valueOf(100))
+                .setScale(PROFIT_RATE_SCALE, RoundingMode.HALF_UP);
+
+        return profitRate.doubleValue();
+    }
+
+    private long calculateTotalProfit(LottoRankResult rankResult) {
+        return rankResult.rankCounts().entrySet().stream()
+                .mapToLong(entry -> (long) entry.getKey().getPrize() * entry.getValue())
+                .sum();
     }
 }
