@@ -13,7 +13,7 @@ public record PurchasePrice(int price) {
     }
 
     private void validatePrice(int price) {
-        if (price < 0) {
+        if (price <= 0) {
             throw new IllegalArgumentException(ErrorMessage.PURCHASE_PRICE_NEGATIVE_ERROR.getMessage());
         }
         if (price % LottoRule.LOTTO_PRICE != 0) {
