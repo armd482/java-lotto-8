@@ -24,11 +24,7 @@ public class LottoController {
         Lotto winningLotto = getWinningLotto();
         BonusNumber bonusNumber = getBonusNumber(winningLotto);
 
-        lottoService.purchaseLotto(purchasePrice.getLottoAmount());
-
-        lottoService.getPurchasedLotto().forEach(lotto -> {
-            System.out.println(lotto.getNumbers());
-        });
+        lottoService.purchaseLotto(purchasePrice.getLottoAmount()).forEach(System.out::println);
 
         System.out.println(purchasePrice);
         System.out.println(winningLotto);
