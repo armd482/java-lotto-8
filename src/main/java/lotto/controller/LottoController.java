@@ -33,12 +33,9 @@ public class LottoController {
         BonusNumber bonusNumber = getBonusNumber(winningLotto);
 
         LottoRankResult result = lottoService.getCountResult(winningLotto, bonusNumber, purchasedLotto);
-
-        result.rankCounts().forEach((rank, count) -> System.out.println(rank.toString() + count));
-
         double profitRate = lottoService.calculateProfitRate(result, purchasePrice);
 
-        System.out.println("Profit rate: " + profitRate);
+        outputView.printLottoStatic(result, profitRate);
     }
 
     private PurchasePrice getPurchasePrice() {

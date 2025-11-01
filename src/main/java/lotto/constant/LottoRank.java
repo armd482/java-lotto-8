@@ -44,4 +44,12 @@ public enum LottoRank {
         return prize;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public boolean isBonusMatch() {
+        return bonusMatch;
+    }
+
 }
