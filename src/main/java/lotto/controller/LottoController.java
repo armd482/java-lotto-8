@@ -4,6 +4,7 @@ import java.util.List;
 import lotto.constant.ErrorMessage;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
+import lotto.model.LottoRankResult;
 import lotto.model.PurchasePrice;
 import lotto.service.LottoService;
 import lotto.util.InputLoop;
@@ -21,14 +22,16 @@ public class LottoController {
 
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
+        List<Lotto> purchasedLotto = lottoService.purchaseLotto(purchasePrice.getLottoAmount());
+
+        purchasedLotto.forEach(System.out::println);
+
         Lotto winningLotto = getWinningLotto();
         BonusNumber bonusNumber = getBonusNumber(winningLotto);
 
-        lottoService.purchaseLotto(purchasePrice.getLottoAmount()).forEach(System.out::println);
+        LottoRankResult result = lottoService.getCountResult(winningLotto, bonusNumber, purchasedLotto);
 
-        System.out.println(purchasePrice);
-        System.out.println(winningLotto);
-        System.out.println(bonusNumber);
+        result.getRankCounts().forEach((rank, count) -> System.out.println(rank.toString() + count));
     }
 
     private PurchasePrice getPurchasePrice() {

@@ -34,4 +34,14 @@ public class Lotto {
     public Boolean isContain(int lottoNumber) {
         return numbers.contains(lottoNumber);
     }
+
+    public int countMatches(Lotto otherLotto) {
+        return (int) numbers.stream()
+                            .filter(otherLotto::isContain)
+                            .count();
+    }
+
+    public String toString(){
+        return numbers.toString();
+    }
 }
