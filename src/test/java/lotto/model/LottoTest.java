@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.*;
 class LottoTest {
     @Test
     @DisplayName("로또 정상 객체 생성")
-    void LottoInitTest() {
+    void lottoInitTest() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         assertThat(lotto.getNumbers()).isEqualTo(List.of(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     @DisplayName("로또 번호를 6개 미만으로 입력한 경우")
-    void LottoBelowSizeInitTest() {
+    void lottoBelowSizeInitTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LOTTO_NUMBER_COUNT_ERROR.getMessage());
@@ -26,7 +26,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호를 6개 초과해서 입력한 경우")
-    void LottoOverSizeInitTest() {
+    void lottoOverSizeInitTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LOTTO_NUMBER_COUNT_ERROR.getMessage());
@@ -34,7 +34,7 @@ class LottoTest {
 
     @DisplayName("로또 번호에 중복된 숫자가 포함된 경우")
     @Test
-    void LottoDuplicateInitTest() {
+    void lottoDuplicateInitTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LOTTO_NUMBER_DUPLICATE_ERROR.getMessage());
@@ -42,7 +42,7 @@ class LottoTest {
 
     @Test
     @DisplayName("로또 번호에 범위가 벗어난 숫자가 포함된 경우")
-    void LottoOutOfRangeInitTest() {
+    void lottoOutOfRangeInitTest() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 52, 4, 5, 6)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.LOTTO_NUMBER_RANGE_ERROR.getMessage());

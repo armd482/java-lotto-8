@@ -2,7 +2,7 @@ package lotto.view;
 
 import java.util.Comparator;
 import java.util.List;
-import lotto.model.LottoRank;
+import lotto.constant.LottoRank;
 import lotto.model.Lotto;
 import lotto.model.LottoRankResult;
 import lotto.util.OutputFormatter;

@@ -2,7 +2,7 @@ package lotto.util;
 
 import java.util.stream.Collectors;
 import lotto.constant.OutputMessage;
-import lotto.model.LottoRank;
+import lotto.constant.LottoRank;
 import lotto.model.Lotto;
 
 public class OutputFormatter {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.model.LottoRank;
+import lotto.constant.LottoRank;
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
 import lotto.model.LottoRankResult;
