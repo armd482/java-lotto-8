@@ -10,13 +10,16 @@ import lotto.service.LottoService;
 import lotto.util.InputLoop;
 import lotto.util.InputParser;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
+    private final OutputView outputView;
     private final LottoService lottoService;
 
-    public LottoController(InputView inputView, LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
+        this.outputView = outputView;
         this.lottoService =  lottoService;
     }
 
@@ -24,7 +27,7 @@ public class LottoController {
         PurchasePrice purchasePrice = getPurchasePrice();
         List<Lotto> purchasedLotto = lottoService.purchaseLotto(purchasePrice.getLottoAmount());
 
-        purchasedLotto.forEach(System.out::println);
+        outputView.printPurchasedLotto(purchasedLotto);
 
         Lotto winningLotto = getWinningLotto();
         BonusNumber bonusNumber = getBonusNumber(winningLotto);

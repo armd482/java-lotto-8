@@ -25,6 +25,7 @@ public class InputView {
 
     private String getInput() {
         String input = Console.readLine().trim();
+        System.out.println();
 
         if (input.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT.getMessage());
