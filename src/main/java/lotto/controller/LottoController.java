@@ -8,7 +8,6 @@ import lotto.model.PurchasePrice;
 import lotto.service.LottoService;
 import lotto.util.InputLoop;
 import lotto.util.InputParser;
-import lotto.util.Validator;
 import lotto.view.InputView;
 
 public class LottoController {
@@ -39,7 +38,6 @@ public class LottoController {
     private PurchasePrice getPurchasePrice() {
         return InputLoop.askUntilValid(() -> {
             String purchasePriceInput = inputView.getPurchasePrice();
-            Validator.validateEmptyInput(purchasePriceInput);
 
             int purchasePrice = Integer.parseInt(purchasePriceInput);
             return new PurchasePrice(purchasePrice);
@@ -49,7 +47,6 @@ public class LottoController {
     private Lotto getWinningLotto() {
         return InputLoop.askUntilValid(() -> {
             String winningLottoInput = inputView.getWinningNumber();
-            Validator.validateEmptyInput(winningLottoInput);
 
             List<Integer> winningNumbers = InputParser.parseWinningNumber(winningLottoInput);
             return new Lotto(winningNumbers);
@@ -59,7 +56,6 @@ public class LottoController {
     private BonusNumber getBonusNumber(Lotto winningLotto) {
         return InputLoop.askUntilValid(() -> {
             String bonusNumberInput = inputView.getBonusNumber();
-            Validator.validateEmptyInput(bonusNumberInput);
 
             int bonusNumber = Integer.parseInt(bonusNumberInput);
 

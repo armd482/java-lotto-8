@@ -1,6 +1,7 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.constant.ErrorMessage;
 
 public class InputView {
     private final String PURCHASE_PRICE_INPUT_MESSAGE = "구입금액을 입력해 주세요.";
@@ -9,16 +10,25 @@ public class InputView {
 
     public String getPurchasePrice() {
         System.out.println(PURCHASE_PRICE_INPUT_MESSAGE);
-        return Console.readLine().trim();
+        return getInput();
     }
 
     public String getWinningNumber() {
         System.out.println(WINNING_NUMBER_INPUT_MESSAGE);
-        return Console.readLine().trim();
+        return getInput();
     }
 
     public String getBonusNumber() {
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
-        return Console.readLine().trim();
+        return getInput();
+    }
+
+    private String getInput() {
+        String input = Console.readLine().trim();
+
+        if (input.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_INPUT.getMessage());
+        }
+        return input;
     }
 }
