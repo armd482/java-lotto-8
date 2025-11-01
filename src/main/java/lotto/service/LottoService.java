@@ -16,12 +16,12 @@ import lotto.strategy.LottoGenerateStrategy;
 public class LottoService {
     private static final int PROFIT_RATE_SCALE = 1;
 
-    public List<Lotto> purchaseLotto(int amount, LottoGenerateStrategy strategy) {
-        List<Lotto> purchasedLotto = new ArrayList<>();
+    public List<Lotto> generateRandomLottos(int amount, LottoGenerateStrategy strategy) {
+        List<Lotto> generatedLotto = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            purchasedLotto.add(strategy.generateLotto());
+            generatedLotto.add(strategy.generateLotto());
         }
-        return purchasedLotto;
+        return generatedLotto;
     }
 
     public LottoRankResult getCountResult(Lotto winningNumber, BonusNumber bonusNumber, List<Lotto> purchasedLotto) {

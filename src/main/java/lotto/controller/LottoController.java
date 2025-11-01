@@ -28,7 +28,7 @@ public class LottoController {
 
     public void run() {
         PurchasePrice purchasePrice = getPurchasePrice();
-        List<Lotto> purchasedLotto = lottoService.purchaseLotto(purchasePrice.getLottoAmount(), lottoGenerateStrategy);
+        List<Lotto> purchasedLotto = lottoService.generateRandomLottos(purchasePrice.getLottoAmount(), lottoGenerateStrategy);
 
         outputView.printPurchasedLotto(purchasedLotto);
 
