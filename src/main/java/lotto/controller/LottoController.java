@@ -31,7 +31,7 @@ public class LottoController {
 
         LottoRankResult result = lottoService.getCountResult(winningLotto, bonusNumber, purchasedLotto);
 
-        result.getRankCounts().forEach((rank, count) -> System.out.println(rank.toString() + count));
+        result.rankCounts().forEach((rank, count) -> System.out.println(rank.toString() + count));
     }
 
     private PurchasePrice getPurchasePrice() {
