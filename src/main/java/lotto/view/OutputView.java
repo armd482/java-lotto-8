@@ -8,7 +8,7 @@ import lotto.model.LottoRankResult;
 import lotto.util.OutputFormatter;
 
 public class OutputView {
-    private static final String PURCHASE_LOTTO_MESSAGE = "%d개를 구매했습니다%n";
+    private static final String PURCHASE_LOTTO_MESSAGE = "%d개를 구매했습니다.%n";
     private static final String LOTTO_STATIC_HEADER_MESSAGE = "당첨 통계\n---";
 
 
