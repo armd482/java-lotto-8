@@ -11,7 +11,7 @@ public class InputParser {
         try {
             return Arrays.stream(input.split(SEPARATOR)).map(Integer::parseInt).toList();
         } catch (NumberFormatException e) {
-            throw new NumberFormatException(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.PARSE_INTEGER_INPUT.getMessage());
         }
     }
 }
